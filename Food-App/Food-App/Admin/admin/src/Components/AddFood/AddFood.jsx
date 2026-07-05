@@ -11,10 +11,8 @@ const AddFood = () => {
 
   const [data, setData] = useState({
     name: "",
-    description: "",
-    oldPrice: "",
     newPrice: "",
-    category: "Pizza",
+    category: "Breakfast",
     isTodaysMeal: false,
   });
 
@@ -51,7 +49,7 @@ const AddFood = () => {
         setData({
           name: "",
           newPrice: "",
-          category: "Pizza",
+          category: "Breakfast",
           isTodaysMeal: false,
         });
 
@@ -110,7 +108,7 @@ name="category"
 value={data.category}
 onChange={onChangeHandler}
 >
-<option>BreakFast</option>
+<option>Breakfast</option>
 <option>Lunch</option>
 <option>Dinner</option>
 </select>

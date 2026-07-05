@@ -18,7 +18,7 @@ const AdminOrders = () => {
     try{
 
       const response = await axios.get(
-        "http://localhost:4000/allorders"
+        "http://localhost:4000/api/order/allorders"
       )
 
       if(response.data.success){
