@@ -11,22 +11,22 @@ const Login = () => {
     password: "",
   });
 
-  useEffect(() => {
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: "YOUR_FACEBOOK_APP_ID", // <-- Replace with your App ID
-        cookie: true,
-        xfbml: true,
-        version: "v23.0",
-      });
-    };
+  // useEffect(() => {
+  //   window.fbAsyncInit = function () {
+  //     window.FB.init({
+  //       appId: "YOUR_FACEBOOK_APP_ID", // <-- Replace with your App ID
+  //       cookie: true,
+  //       xfbml: true,
+  //       version: "v23.0",
+  //     });
+  //   };
 
-    const script = document.createElement("script");
-    script.src = "https://connect.facebook.net/en_US/sdk.js";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-  }, []);
+  //   const script = document.createElement("script");
+  //   script.src = "https://connect.facebook.net/en_US/sdk.js";
+  //   script.async = true;
+  //   script.defer = true;
+  //   document.body.appendChild(script);
+  // }, []);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });

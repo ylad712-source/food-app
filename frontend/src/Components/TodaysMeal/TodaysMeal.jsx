@@ -11,7 +11,7 @@ const TodaysMeal = () => {
   const fetchTodaysMeal = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:4000/api/food/todaysMeal"
+        "http://localhost:4000/api/food/todays-meal"
       );
 
       if (res.data.success) {
@@ -38,7 +38,7 @@ const TodaysMeal = () => {
       );
 
       if (res.data.success) {
-        window.dispatchEvent(new Event("cartUpdated")); // 🔥 navbar sync
+        window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {
       console.log(error);

@@ -5,7 +5,7 @@ import './AddFood.css'
 
 const AddFood = () => {
 
-  const url = "http://localhost:4000";
+ 
 
   const [image, setImage] = useState(false);
 
@@ -39,7 +39,7 @@ const AddFood = () => {
 
     try {
       const response = await axios.post(
-        `${url}/api/food/add`,
+        "http://localhost:4000/api/food/add",
         formData
       );
 

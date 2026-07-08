@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 const app = express();
 const port = 4000;
@@ -15,6 +16,7 @@ connectDB();
 //api endpoint 
 
 app.use("/api/food",foodRouter)
+app.use("/api/user",userRouter)
 
 app.get("/", (req, res) => {
   res.send("API WORKING");
