@@ -27,7 +27,7 @@ const Navbar = () => {
       }
 
       const res = await axios.post(
-        "http://localhost:4000/api/cart/get",
+        "http://localhost:4000/api/user/get-cart",
         { userId }
       );
 
@@ -86,7 +86,7 @@ const Navbar = () => {
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Menu</Link></li>
-        <li><Link to="/recommendation">Recommendation</Link></li>
+        <li><Link to="/weeklyPlan">Weekly Plan</Link></li>
         <li><Link to="/about">About</Link></li>
       </ul>
 

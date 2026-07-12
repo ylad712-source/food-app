@@ -9,13 +9,13 @@ const Cart = () => {
 
   const userId = localStorage.getItem("userId");
 
-  // 🔥 FETCH CART
+  // Fetch Cart
   const fetchCart = async () => {
     try {
       if (!userId) return;
 
       const res = await axios.post(
-        "http://localhost:4000/api/cart/get",
+        "http://localhost:4000/api/user/get-cart",
         { userId }
       );
 
@@ -34,17 +34,16 @@ const Cart = () => {
     fetchCart();
   }, []);
 
-  // 🔥 SYNC FUNCTION (cart + navbar update)
-  const syncCart = () => {
-    fetchCart();
+  const syncCart = async () => {
+    await fetchCart();
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // ➕ INCREASE
+  // Increase Quantity
   const increaseQuantity = async (itemId) => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/cart/increase",
+        "http://localhost:4000/api/user/increase",
         { userId, itemId }
       );
 
@@ -56,11 +55,11 @@ const Cart = () => {
     }
   };
 
-  // ➖ DECREASE
+  // Decrease Quantity
   const decreaseQuantity = async (itemId) => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/cart/decrease",
+        "http://localhost:4000/api/user/decrease",
         { userId, itemId }
       );
 
@@ -72,11 +71,11 @@ const Cart = () => {
     }
   };
 
-  // ❌ REMOVE
+  // Remove Item
   const removeItem = async (itemId) => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/cart/remove",
+        "http://localhost:4000/api/user/remove",
         { userId, itemId }
       );
 
@@ -88,9 +87,9 @@ const Cart = () => {
     }
   };
 
-  // 💰 TOTAL
+  // Total Price
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.newPrice * item.quantity,
+    (total, item) => total + Number(item.newPrice) * Number(item.quantity),
     0
   );
 
@@ -103,22 +102,20 @@ const Cart = () => {
       ) : (
         <>
           <div className="cart-items">
-
             {cartItems.map((item) => (
               <div className="cart-item" key={item._id}>
-
-                {/* IMAGE */}
+                {/* Image */}
                 <img
-                  src={`http://localhost:4000/images/${item.image}`}
+                  src={`http://localhost:4000/image/${item.image}`}
                   alt={item.name}
                 />
 
-                {/* DETAILS */}
+                {/* Details */}
                 <div className="cart-details">
                   <h3>{item.name}</h3>
+
                   <p>₹{item.newPrice}</p>
 
-                  {/* QUANTITY */}
                   <div className="quantity">
                     <button onClick={() => decreaseQuantity(item._id)}>
                       -
@@ -132,20 +129,16 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/* REMOVE */}
                 <button
                   className="remove-btn"
                   onClick={() => removeItem(item._id)}
                 >
                   Remove
                 </button>
-
               </div>
             ))}
-
           </div>
 
-          {/* SUMMARY */}
           <div className="cart-summary">
             <h2>Total: ₹{totalPrice}</h2>
 

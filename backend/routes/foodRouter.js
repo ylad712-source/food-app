@@ -16,6 +16,7 @@ const upload  = multer({storage:storage})
 
 foodRouter.post("/add",upload.single("image"),addFood)
 foodRouter.get("/get-food",getAllFoods)
+
 foodRouter.get('/todays-meal',getTodaysMeal)
 
 export default foodRouter

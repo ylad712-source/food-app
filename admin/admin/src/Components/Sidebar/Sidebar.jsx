@@ -25,6 +25,11 @@ const Sidebar = () => {
         <p>Orders</p>
        </div>
       </Link>
+      <Link to={'/weeklyplan'} state={{textDecoration:"none"}}>
+      <div className="sidebar-item">
+        <p>Weekly Plans</p>
+       </div>
+      </Link>
     </div>
   )
 }

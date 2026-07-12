@@ -7,7 +7,7 @@ const Item = (props) => {
    <div className='col-lg-3 col-md-3 col-sm-6 col-6'>
       <div className='item'>
         <div className="card" >
-          <Link to={`/product/${props.id}`} ><img src={`http://localhost:4000/images/${props.image}`} className="card-img-top" alt="..." /></Link>
+          <Link to={`/product/${props.id}`} ><img src={`http://localhost:4000/image/${props.image}`} className="card-img-top" alt="..." /></Link>
           <div className="card-body">
             <h5 className="card-title">{props.name}</h5>
            <div className="price">

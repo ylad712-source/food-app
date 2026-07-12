@@ -9,7 +9,7 @@ function App() {
      <div className="app" style={{backgroundColor:"whitesmoke"}}>
      <Navbar />
       <Admin />
-      {/* <RecipeSimulation /> */}
+      
       
     </div>
   );

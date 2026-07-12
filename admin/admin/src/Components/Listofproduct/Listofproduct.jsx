@@ -46,7 +46,7 @@ const Listofproduct = () => {
       <div className="listproduct-allproduct">
         {products.map((item, i) => (
           <div key={i} className="product-list-format listproduct-format">
-           <img className="product-image" src={`http://localhost:4000/images/${item.image}`} alt="" />
+           <img className="product-image" src={`http://localhost:4000/image/${item.image}`} alt="" />
             <p>{item.name}</p>
             <p>{item.newPrice}</p>
             <p>{item.category}</p>

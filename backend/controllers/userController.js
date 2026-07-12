@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import foodModel from "../models/foodModel.js";
 import transporter from "../config/mail.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -261,4 +262,198 @@ const facebookLogin = async (req, res) => {
   }
 };
 
-export {signup, login, forgotPassword, verifyOtp, resetPassword };
+
+//add to cart 
+const addToCart = async (req, res) => {
+  try {
+    const { userId, itemId } = req.body;
+
+    if (!userId || !itemId) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID and Item ID are required",
+      });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const food = await foodModel.findById(itemId);
+
+    if (!food) {
+      return res.status(404).json({
+        success: false,
+        message: "Food not found",
+      });
+    }
+
+    let cart = user.cartData || [];
+
+    const existingItem = cart.find(
+      (item) => item._id.toString() === itemId
+    );
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        _id: food._id,
+        name: food.name,
+        image: food.image,
+        newPrice: food.newPrice,
+        quantity: 1,
+      });
+    }
+
+    user.cartData = cart;
+
+    await user.save();
+
+    return res.json({
+      success: true,
+      message: "Item added to cart",
+      cartData: cart,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+//get cart
+const getCart = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      cartData: user.cartData || [],
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+//Increse quantity
+const increaseQuantity = async (req, res) => {
+  try {
+
+    const { userId, itemId } = req.body;
+
+    const user = await User.findById(userId);
+
+    const item = user.cartData.find(
+      (item) => item._id.toString() === itemId
+    );
+
+    if (!item) {
+      return res.json({
+        success: false,
+        message: "Item not found",
+      });
+    }
+
+    item.quantity++;
+
+    await user.save();
+
+    res.json({
+      success: true,
+      cartData: user.cartData,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+const decreaseQuantity = async (req, res) => {
+  try {
+
+    const { userId, itemId } = req.body;
+
+    const user = await User.findById(userId);
+
+    const item = user.cartData.find(
+      (item) => item._id.toString() === itemId
+    );
+
+    if (!item) {
+      return res.json({
+        success: false,
+        message: "Item not found",
+      });
+    }
+
+    if (item.quantity > 1) {
+      item.quantity--;
+    }
+
+    await user.save();
+
+    res.json({
+      success: true,
+      cartData: user.cartData,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+const removeItem = async (req, res) => {
+  try {
+
+    const { userId, itemId } = req.body;
+
+    const user = await User.findById(userId);
+
+    user.cartData = user.cartData.filter(
+      (item) => item._id.toString() !== itemId
+    );
+
+    await user.save();
+
+    res.json({
+      success: true,
+      cartData: user.cartData,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+export {signup, login, forgotPassword, verifyOtp, resetPassword, addToCart,getCart,increaseQuantity,decreaseQuantity, removeItem};

@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRouter.js";
 import userRouter from "./routes/userRouter.js";
+import weeklyPlanRouter from "./routes/weeklyPlanRouter.js";
+
 
 const app = express();
 const port = 4000;
@@ -13,10 +15,14 @@ app.use(cors());
 
 connectDB();
 
+app.use("/image", express.static("upload"));
 //api endpoint 
 
 app.use("/api/food",foodRouter)
 app.use("/api/user",userRouter)
+app.use("/api/weekly-plan", weeklyPlanRouter);
+
+
 
 app.get("/", (req, res) => {
   res.send("API WORKING");

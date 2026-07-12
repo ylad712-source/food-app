@@ -13,6 +13,7 @@ import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
 import ForgotPassword from './Components/Login/forgotPassword';
 import NewPassword from './Components/Login/newPassword';
+import CreateWeeklyPlan from './Pages/CreateWeeklyPlan';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/menu' element={<Menu />}/>
         <Route path='/signup' element={<Signup />}/>
         <Route path="/about" element={<About />}/>
+        <Route path="/weeklyPlan" element={<CreateWeeklyPlan />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/new-password' element={<NewPassword />} />

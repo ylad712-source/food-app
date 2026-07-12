@@ -41,8 +41,8 @@ const Footer = () => {
         {/* Contact */}
         <div className="footer-box">
           <h3>Contact</h3>
-          <p>📍 Nagpur, India</p>
-          <p>📞 +91 98765 43210</p>
+          <p>📍 Vileparle, Mumbai</p>
+          <p>📞 +91 9356334818</p>
           <p>✉️ support@foodfit.com</p>
         </div>
 

@@ -15,7 +15,7 @@ const Menu = () => {
 
   const fetchFoods = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/food/list");
+      const res = await axios.get("http://localhost:4000/api/food/get-food");
 
       if (res.data.success) {
         setFoods(res.data.data);
@@ -24,22 +24,31 @@ const Menu = () => {
       console.log(error);
     }
   };
+const addToCart = async (itemId) => {
+  try {
+    console.log("User ID:", userId);
+    console.log("Item ID:", itemId);
 
-  // ✅ ADD TO CART (BACKEND)
-  const addToCart = async (itemId) => {
-    try {
-      const res = await axios.post("http://localhost:4000/api/cart/add", {
+    const res = await axios.post(
+      "http://localhost:4000/api/user/add-to-cart",
+      {
         userId,
         itemId,
-      });
-
-      if (res.data.success) {
-        window.dispatchEvent(new Event("cartUpdated")); // 🔥 navbar update
       }
-    } catch (error) {
-      console.log(error);
+    );
+
+    console.log(res.data);
+
+    if (res.data.success) {
+      alert("Added to Cart");
     }
-  };
+
+  } catch (error) {
+    console.log("Status:", error.response?.status);
+    console.log("Response:", error.response?.data);
+    console.log(error);
+  }
+};
 
   return (
     <div className="menu">

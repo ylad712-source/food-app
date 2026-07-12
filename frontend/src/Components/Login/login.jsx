@@ -46,6 +46,7 @@ const Login = () => {
         localStorage.setItem("userId", res.data.userId);
 
         alert("Login Successful");
+        console.log("Saved UserId:", localStorage.getItem("userId"));
         navigate("/");
       } else {
         alert(res.data.message);
@@ -105,7 +106,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
 
-      <button
+      {/* <button
         onClick={facebookLogin}
         style={{
           marginTop: "15px",
@@ -119,7 +120,7 @@ const Login = () => {
         }}
       >
         Continue with Facebook
-      </button>
+      </button> */}
 
       <p className="forgot-password">
         <Link to="/forgot-password">Forgot Password?</Link>
